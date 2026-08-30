@@ -1,0 +1,10 @@
+Property,Value
+Shape,"(200, 200, 3)"
+Height,200
+Width,200
+Channels,3
+Data Type,uint8
+Min Pixel,0
+Max Pixel,177
+Mean Pixel,110.71
+Std Dev,40.04

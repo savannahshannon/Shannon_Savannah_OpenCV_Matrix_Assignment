@@ -1,0 +1,14 @@
+Operation,Max_diff,Mean_diff,Exact_matches,Percent_match,Status
+Negative,0.0,0.0,49/49,100.0,Pass
+Brightness,0.0,0.0,49/49,100.0,Pass
+Contrast,0.0,0.0,49/49,100.0,Pass
+Threshold,0.0,0.0,49/49,100.0,Pass
+Horizontal flip,84.0,33.6530612244898,0/49,0.0,Close
+Mean filter,0.0,0.0,25/25,100.0,Pass
+Gaussian filter,1.0,0.12,22/25,88.0,Close
+Median filter,0.0,0.0,25/25,100.0,Pass
+Sobel Gx,0.0,0.0,25/25,100.0,Pass
+Sobel Gy,0.0,0.0,25/25,100.0,Pass
+Sobel magnitude,0.0,0.0,25/25,100.0,Pass
+Erosion,0.0,0.0,25/25,100.0,Pass
+Dilation,0.0,0.0,25/25,100.0,Pass
