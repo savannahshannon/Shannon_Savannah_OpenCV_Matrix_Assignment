@@ -47,6 +47,7 @@ pip install -r requirements.txt
     - reports statistics and accuracy
 
 # Project Structure
+```
 OpenCV_Matrix_Assignment/
 ├── README.md
 ├── requirements.txt
@@ -106,6 +107,7 @@ OpenCV_Matrix_Assignment/
 ├── manual_input_patch_7x7.csv
 ├── op01_input.csv through op13_difference.csv
 └── verification_summary.csv
+```
 
 # Key Findings
 
