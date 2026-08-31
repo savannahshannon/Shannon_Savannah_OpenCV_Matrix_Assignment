@@ -126,7 +126,7 @@ Height,Width,Channels,Min_Value,Max_Value,Mean_Value,Std_Dev
 
 ### PART 1: COLOR & INTENSITY OPERATIONS
 
-#### op01: Grayscale Conversion
+#### Grayscale Conversion
 
 **Operation Name:** Grayscale Conversion  
 **Purpose:** Convert BGR color image to single-channel grayscale representation  
@@ -137,7 +137,7 @@ Height,Width,Channels,Min_Value,Max_Value,Mean_Value,Std_Dev
 - Formula: `I_gray = round(0.114B + 0.587G + 0.299R)`
 
 **Input:** `image_200x200.png` (200×200×3 BGR)  
-**Output:** `op01_grayscale.png` (200×200×1)  
+**Output:** `grayscale.png` (200×200×1)  
 **Output Dimensions:** (200, 200)  
 **Data Type:** uint8
 
@@ -146,7 +146,7 @@ The grayscale conversion combines RGB channels using weighted coefficients that 
 
 ---
 
-#### op02-04: Channel Extraction
+#### Channel Extraction
 
 **Operation Name:** Channel Extraction (Blue, Green, Red)  
 **Purpose:** Separate individual color channels for analysis  
@@ -158,9 +158,9 @@ b_channel, g_channel, r_channel = cv.split(img)
 ```
 
 **Output Files:**
-- `op02_blue_channel.png` (200×200)
-- `op03_green_channel.png` (200×200)
-- `op04_red_channel.png` (200×200)
+- `blue_channel.png` (200×200)
+- `green_channel.png` (200×200)
+- `red_channel.png` (200×200)
 
 **Output Dimensions:** Each (200, 200)  
 **Data Type:** uint8
@@ -170,7 +170,7 @@ Each channel shows the intensity distribution of that color component. Green cha
 
 ---
 
-#### op05: Channel Reconstruction
+#### Channel Reconstruction
 
 **Operation Name:** Channel Reconstruction  
 **Purpose:** Recombine separated channels back to original color image  
@@ -180,7 +180,7 @@ Each channel shows the intensity distribution of that color component. Green cha
 - Channel order: BGR (critical for OpenCV)
 
 **Input:** Three separate channel matrices (B, G, R)  
-**Output:** `op05_reconstructed.png` (200×200×3)  
+**Output:** `reconstructed.png` (200×200×3)  
 **Output Dimensions:** (200, 200, 3)  
 **Data Type:** uint8
 
@@ -189,7 +189,7 @@ Demonstrates reversibility of channel separation. Perfect reconstruction if no m
 
 ---
 
-#### op06: Negative (Inversion)
+#### Negative (Inversion)
 
 **Operation Name:** Image Negative  
 **Purpose:** Invert all pixel values (photographic negative effect)  
@@ -204,7 +204,7 @@ I_negative(i,j) = 255 - I(i,j)
 - Maximum value: 255 (uint8 range)
 
 **Input:** Grayscale image (200×200)  
-**Output:** `op06_negative.png` (200×200)  
+**Output:** `negative.png` (200×200)  
 **Output Dimensions:** (200, 200)  
 **Data Type:** uint8
 
@@ -226,7 +226,7 @@ Creates a dramatic visual inversion. Dark areas become bright and vice versa. No
 
 ---
 
-#### op07: Brightness Adjustment
+#### Brightness Adjustment
 
 **Operation Name:** Brightness Addition  
 **Purpose:** Increase image brightness uniformly  
@@ -242,7 +242,7 @@ I_bright(i,j) = clip(I(i,j) + 40, 0, 255)
 - Clipping range: [0, 255]
 
 **Input:** Grayscale image (200×200)  
-**Output:** `op07_brightness.png` (200×200)  
+**Output:** `brightness.png` (200×200)  
 **Output Dimensions:** (200, 200)  
 **Data Type:** uint8
 
@@ -263,7 +263,7 @@ Linear brightness increase. Pixels near 255 clip to maximum (information loss at
 
 ---
 
-#### op08: Contrast Enhancement
+#### Contrast Enhancement
 
 **Operation Name:** Contrast Multiplication  
 **Purpose:** Increase difference between light and dark areas  
@@ -279,7 +279,7 @@ I_contrast(i,j) = clip(I(i,j) × 1.25, 0, 255)
 - Clipping range: [0, 255]
 
 **Input:** Grayscale image (200×200)  
-**Output:** `op08_contrast.png` (200×200)  
+**Output:** `contrast.png` (200×200)  
 **Output Dimensions:** (200, 200)  
 **Data Type:** uint8
 
@@ -309,7 +309,7 @@ Enhances differences between tones. Mid-gray (128) becomes lighter (160), black 
 - Method: THRESH_BINARY (any value > threshold → 255, else → 0)
 
 **Input:** Grayscale image (200×200)  
-**Output:** `op09_threshold.png` (200×200)  
+**Output:** `threshold.png` (200×200)  
 **Output Dimensions:** (200, 200)  
 **Data Type:** uint8 (binary: 0 or 255)
 
@@ -344,7 +344,7 @@ Creates sharp separation at threshold. Useful for segmentation but loses all gra
 4. Apply mapping to stretch intensity range
 
 **Input:** Grayscale image (200×200)  
-**Output:** `op10_histogram_eq.png` (200×200)  
+**Output:** `histogram_eq.png` (200×200)  
 **Output Dimensions:** (200, 200)  
 **Data Type:** uint8
 
@@ -355,7 +355,7 @@ Redistributes pixel values to use full 0-255 range. Improves contrast especially
 
 ### PART 2: GEOMETRIC OPERATIONS
 
-#### op11: Center 100×100 Extraction
+#### Center 100×100 Extraction
 
 **Operation Name:** Center Region Extraction  
 **Purpose:** Extract region of interest from image center  
@@ -367,7 +367,7 @@ Redistributes pixel values to use full 0-255 range. Improves contrast especially
 - Extraction: [50:150, 50:150]
 
 **Input:** Grayscale image (200×200)  
-**Output:** `op11_center_100x100.png` (100×100)  
+**Output:** `center_100x100.png` (100×100)  
 **Output Dimensions:** (100, 100)  
 **Data Type:** uint8
 
@@ -376,7 +376,7 @@ Focuses analysis on central region, excluding borders. Useful for eliminating ed
 
 ---
 
-#### op12: Horizontal Flip
+#### Horizontal Flip
 
 **Operation Name:** Horizontal Flip  
 **Purpose:** Mirror image left-to-right  
@@ -386,7 +386,7 @@ Focuses analysis on central region, excluding borders. Useful for eliminating ed
 - Flip code: 1 (flip around vertical axis)
 
 **Input:** Grayscale image (200×200)  
-**Output:** `op12_horizontal_flip.png` (200×200)  
+**Output:** `horizontal_flip.png` (200×200)  
 **Output Dimensions:** (200, 200)  
 **Data Type:** uint8
 
@@ -395,7 +395,7 @@ Creates mirror image. No pixel value changes, only spatial rearrangement. Useful
 
 ---
 
-#### op13: Vertical Flip
+#### Vertical Flip
 
 **Operation Name:** Vertical Flip  
 **Purpose:** Mirror image top-to-bottom  
@@ -405,7 +405,7 @@ Creates mirror image. No pixel value changes, only spatial rearrangement. Useful
 - Flip code: 0 (flip around horizontal axis)
 
 **Input:** Grayscale image (200×200)  
-**Output:** `op13_vertical_flip.png` (200×200)  
+**Output:** `vertical_flip.png` (200×200)  
 **Output Dimensions:** (200, 200)  
 **Data Type:** uint8
 
@@ -414,7 +414,7 @@ Flips image vertically. Combined with horizontal flip produces 180° rotation.
 
 ---
 
-#### op14: 90° Rotation
+#### 90° Rotation
 
 **Operation Name:** 90-Degree Rotation  
 **Purpose:** Rotate image 90 degrees clockwise  
@@ -425,7 +425,7 @@ Flips image vertically. Combined with horizontal flip produces 180° rotation.
 - Output dimensions: (200, 200) maintained
 
 **Input:** Grayscale image (200×200)  
-**Output:** `op14_rotate_90.png` (200×200)  
+**Output:** `rotate_90.png` (200×200)  
 **Output Dimensions:** (200, 200)  
 **Data Type:** uint8
 
@@ -434,7 +434,7 @@ Rigid rotation without dimension change. Pixel intensity preserved, only spatial
 
 ---
 
-#### op15: 30° Rotation
+#### 30° Rotation
 
 **Operation Name:** Arbitrary Angle Rotation  
 **Purpose:** Rotate image by custom angle (30°)  
@@ -447,7 +447,7 @@ Rigid rotation without dimension change. Pixel intensity preserved, only spatial
 - Interpolation: INTER_LINEAR
 
 **Input:** Grayscale image (200×200)  
-**Output:** `op15_rotate_30.png` (200×200)  
+**Output:** `rotate_30.png` (200×200)  
 **Output Dimensions:** (200, 200)  
 **Data Type:** uint8
 
@@ -456,19 +456,19 @@ Creates rotated view. Corners outside rotated image area fill with background (t
 
 ---
 
-#### op16-18: Resizing Operations
+#### Resizing Operations
 
-**op16: Resize to 100×100**
+** Resize to 100×100**
 - **Function:** `cv.resize(gray, (100, 100), interpolation=cv.INTER_LINEAR)`
 - **Output:** 100×100 pixels
 - **Method:** Bilinear interpolation
 
-**op17: Nearest-Neighbor Resize**
+** Nearest-Neighbor Resize**
 - **Function:** `cv.resize(gray, (100, 100), interpolation=cv.INTER_NEAREST)`
 - **Output:** 100×100 pixels
 - **Method:** Nearest neighbor (fast, blocky)
 
-**op18: Bilinear Resize**
+** Bilinear Resize**
 - **Function:** `cv.resize(gray, (100, 100), interpolation=cv.INTER_LINEAR)`
 - **Output:** 100×100 pixels
 - **Method:** Bilinear interpolation (smooth)
@@ -488,7 +488,7 @@ Nearest-neighbor preserves sharp edges but creates blockiness. Bilinear interpol
 
 ### PART 3: SPATIAL FILTERING OPERATIONS
 
-#### op19: Mean Filter
+#### Mean Filter
 
 **Operation Name:** Mean (Average) Filter  
 **Purpose:** Reduce noise by averaging neighboring pixels  
@@ -509,7 +509,7 @@ O(i,j) = [I(i-1,j-1) + I(i-1,j) + I(i-1,j+1)
 ```
 
 **Input:** Grayscale image (200×200)  
-**Output:** `op19_mean_filter.png` (200×200)  
+**Output:** `mean_filter.png` (200×200)  
 **Output Dimensions:** (200, 200)  
 **Data Type:** uint8
 
@@ -610,7 +610,7 @@ Mean filter smooths image by replacing each pixel with average of neighborhood. 
 
 ---
 
-#### op20: Gaussian Filter
+#### Gaussian Filter
 
 **Operation Name:** Gaussian Blur  
 **Purpose:** Smooth image with Gaussian-weighted averaging  
@@ -631,7 +631,7 @@ O(i,j) = (1/16) × [1×I(i-1,j-1) + 2×I(i-1,j) + 1×I(i-1,j+1)
 ```
 
 **Input:** Grayscale image (200×200)  
-**Output:** `op20_gaussian_filter.png` (200×200)  
+**Output:** `gaussian_filter.png` (200×200)  
 **Output Dimensions:** (200, 200)  
 **Data Type:** uint8
 
@@ -722,7 +722,7 @@ Gaussian blur weights center pixel more heavily, creating smoother result than m
 
 ---
 
-#### op21: Median Filter
+#### Median Filter
 
 **Operation Name:** Median Filter  
 **Purpose:** Remove outliers and noise while preserving edges  
@@ -731,7 +731,7 @@ Gaussian blur weights center pixel more heavily, creating smoother result than m
 **Method:** Find median value of 3×3 neighborhood
 
 **Input:** Grayscale image (200×200)  
-**Output:** `op21_median_filter.png` (200×200)  
+**Output:** `median_filter.png` (200×200)  
 **Output Dimensions:** (200, 200)  
 **Data Type:** uint8
 
@@ -810,7 +810,7 @@ Median filter excels at removing salt-and-pepper noise while preserving edges be
 
 ### PART 4: EDGE DETECTION OPERATIONS
 
-#### op22-24: Sobel Edge Detection
+#### Sobel Edge Detection
 
 **Operation Name:** Sobel Gradient Operators  
 **Purpose:** Detect edges by computing directional gradients  
@@ -839,9 +839,9 @@ Gy (Vertical Gradient):
 
 **Input:** Grayscale image (200×200)  
 **Outputs:**
-- `op22_sobel_x.png` - Horizontal edges
-- `op23_sobel_y.png` - Vertical edges
-- `op24_sobel_magnitude.png` - Combined edge strength  
+- `sobelx.png` - Horizontal edges
+- `sobely.png` - Vertical edges
+- `sobel_magnitude.png` - Combined edge strength  
 **Output Dimensions:** (200, 200)  
 **Data Type:** float32 (intermediate), uint8 (display)
 
@@ -969,19 +969,19 @@ M = √((-23)² + (-5)²) = √(529 + 25) = √554 = 23.54 → 23
 0  0  0  0  0
 ```
 
-**Verification Results - op22 (Sobel Gx):**
+**Verification Results - (Sobel Gx):**
 - Maximum difference: 0.00
 - Mean difference: 0.0000
 - Exact matches: 25/25 (100.0%)
 - Status: **✓ PASS**
 
-**Verification Results - op23 (Sobel Gy):**
+**Verification Results - (Sobel Gy):**
 - Maximum difference: 0.00
 - Mean difference: 0.0000
 - Exact matches: 25/25 (100.0%)
 - Status: **✓ PASS**
 
-**Verification Results - op24 (Magnitude):**
+**Verification Results - (Magnitude):**
 - Maximum difference: 0.00
 - Mean difference: 0.0000
 - Exact matches: 25/25 (100.0%)
@@ -992,7 +992,7 @@ Sobel operators detect edges by emphasizing intensity changes in horizontal and 
 
 ---
 
-#### op25: Laplacian Edge Detection
+#### Laplacian Edge Detection
 
 **Operation Name:** Laplacian Edge Detection  
 **Purpose:** Detect edges using second-order derivative  
@@ -1006,7 +1006,7 @@ Sobel operators detect edges by emphasizing intensity changes in horizontal and 
 ```
 
 **Input:** Grayscale image (200×200)  
-**Output:** `op25_laplacian.png` (200×200)  
+**Output:** `laplacian.png` (200×200)  
 **Output Dimensions:** (200, 200)  
 **Data Type:** float32 (intermediate), uint8 (display)
 
@@ -1015,7 +1015,7 @@ Laplacian computes second derivative (rate of change of gradient). Detects edges
 
 ---
 
-#### op26: Canny Edge Detection
+#### Canny Edge Detection
 
 **Operation Name:** Canny Edge Detection  
 **Purpose:** Detect edges using multi-stage algorithm  
@@ -1034,7 +1034,7 @@ Laplacian computes second derivative (rate of change of gradient). Detects edges
 5. Edge tracking by hysteresis
 
 **Input:** Grayscale image (200×200)  
-**Output:** `op26_canny.png` (200×200)  
+**Output:** `canny.png` (200×200)  
 **Output Dimensions:** (200, 200)  
 **Data Type:** uint8 (binary: 0 or 255)
 
@@ -1045,7 +1045,7 @@ Canny is considered the gold standard edge detector. Produces thin, well-defined
 
 ### PART 5: MORPHOLOGICAL OPERATIONS
 
-#### op27-30: Morphological Operators
+#### Morphological Operators
 
 **Operation Name:** Erosion, Dilation, Opening, Closing  
 **Purpose:** Modify binary image structure  
@@ -1065,7 +1065,7 @@ _, binary = cv.threshold(gray, 127, 255, cv.THRESH_BINARY)
 
 **Kernel:** 5×5 elliptical structuring element
 
-#### op27: Erosion
+#### Erosion
 
 **Operation Name:** Binary Erosion  
 **Purpose:** Shrink white regions, expand black regions  
@@ -1079,7 +1079,7 @@ _, binary = cv.threshold(gray, 127, 255, cv.THRESH_BINARY)
 ```
 
 **Input:** Binary image (200×200)  
-**Output:** `op27_erosion.png` (200×200)  
+**Output:** `erosion.png` (200×200)  
 **Output Dimensions:** (200, 200)  
 **Data Type:** uint8 (binary)
 
@@ -1159,14 +1159,14 @@ Erosion removes small isolated white regions and thins white structures. Useful 
 
 ---
 
-#### op28: Dilation
+#### Dilation
 
 **Operation Name:** Binary Dilation  
 **Purpose:** Expand white regions, shrink black regions  
 **Rule:** Output pixel = 1 if ANY kernel pixel is 1
 
 **Input:** Binary image (200×200)  
-**Output:** `op28_dilation.png` (200×200)  
+**Output:** `dilation.png` (200×200)  
 **Output Dimensions:** (200, 200)  
 **Data Type:** uint8 (binary)
 
@@ -1234,7 +1234,7 @@ Dilation fills small holes and connects broken structures. Inverse of erosion in
 
 ---
 
-#### op29: Opening (Erosion + Dilation)
+#### Opening (Erosion + Dilation)
 
 **Operation Name:** Morphological Opening  
 **Purpose:** Remove small objects while preserving larger structures  
@@ -1246,14 +1246,14 @@ Dilation fills small holes and connects broken structures. Inverse of erosion in
 - Smooths outer boundaries
 
 **Input:** Binary image (200×200)  
-**Output:** `op29_opening.png` (200×200)
+**Output:** `opening.png` (200×200)
 
 **Interpretation:**
 Opening cleans up binary images by removing small noise while maintaining shape of larger regions. Useful preprocessing for segmentation.
 
 ---
 
-#### op30: Closing (Dilation + Erosion)
+#### Closing (Dilation + Erosion)
 
 **Operation Name:** Morphological Closing  
 **Purpose:** Fill small holes while preserving region boundaries  
@@ -1265,7 +1265,7 @@ Opening cleans up binary images by removing small noise while maintaining shape 
 - Smooths inner boundaries
 
 **Input:** Binary image (200×200)  
-**Output:** `op30_closing.png` (200×200)
+**Output:** `closing.png` (200×200)
 
 **Interpretation:**
 Closing is inverse of opening. Fills interior holes while preserving region shape. Useful for completing broken objects.
@@ -1274,7 +1274,7 @@ Closing is inverse of opening. Fills interior holes while preserving region shap
 
 ### PART 6: CONTOUR ANALYSIS
 
-#### op31-34: Contour Detection and Analysis
+#### Contour Detection and Analysis
 
 **Operation Name:** Contour Detection, Masking, Drawing, Analysis  
 **Purpose:** Identify and analyze object boundaries  
@@ -1290,10 +1290,10 @@ x, y, w, h = cv.boundingRect(contour)
 
 **Input:** Canny edge image (200×200)  
 **Outputs:**
-- `op31_contours.png` - Contours overlaid on original
-- `op32_contour_mask.png` - Binary mask of contour regions
-- `op33_contours_drawn.png` - Contours drawn with bounding boxes
-- `op34_largest_contour_analysis.png` - Largest contour highlighted
+- `contours.png` - Contours overlaid on original
+- `contour_mask.png` - Binary mask of contour regions
+- `contours_drawn.png` - Contours drawn with bounding boxes
+- `largest_contour_analysis.png` - Largest contour highlighted
 
 **Interpretation:**
 Contour detection enables object identification and shape analysis. Bounding rectangle provides region of interest. Hierarchy enables nested object analysis.
@@ -1570,5 +1570,3 @@ This assignment demonstrated the fundamental connection between mathematical ope
 The 100% verification rate on 11 of 13 operations confirms the correctness of manual implementations. The minor differences in 2 operations (due to rounding and pixel value variations) are within acceptable tolerance and demonstrate understanding of real-world image processing challenges.
 
 Most importantly, this exercise shows that OpenCV functions are not "black boxes"—they're implementations of well-defined mathematical algorithms that can be understood, verified, and implemented manually.
-
-

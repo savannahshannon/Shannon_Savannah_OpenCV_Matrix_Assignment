@@ -114,6 +114,20 @@ def color_intensity_op(img, gray):
     reconstructed = cv.merge([b, g, r]) # reconstruct from channels
     cv.imwrite('output_images/reconstructed.png', reconstructed)
     
+    # greyscale 
+    cv.imwrite('output_images/grayscale.png', gray)
+    np.savetxt('csv_full_image/grayscale.csv', gray, fmt='%d', delimiter=',')
+    
+    # individual channels
+    cv.imwrite('output_images/blue_channel.png', b)
+    np.savetxt('csv_full_image/blue_channel.csv', b, fmt='%d', delimiter=',')
+    
+    cv.imwrite('output_images/green_channel.png', g)
+    np.savetxt('csv_full_image/green_channel.csv', g, fmt='%d', delimiter=',')
+    
+    cv.imwrite('output_images/red_channel.png', r)
+    np.savetxt('csv_full_image/red_channel.csv', r, fmt='%d', delimiter=',')
+    
     # image negative
     negative = 255 - gray 
     cv.imwrite('output_images/negative.png', negative)
@@ -290,7 +304,28 @@ def contour_analysis_op(img, canny):
     img_contours = cv.cvtColor(canny, cv.COLOR_GRAY2BGR)
     cv.drawContours(img_contours, contours, -1, (0, 255, 0), 2)
     cv.imwrite('output_images/all_contours.png', img_contours)
-
+    
+    # draw contour with bounding box
+    img_bbox = img.copy()
+    cv.drawContours(img_bbox, contours, -1, (0, 255, 0), 2)
+    if len(contours) > 0:
+        largest_contour = max(contours, key=cv.contourArea)
+        x, y, w, h = cv.boundingRect(largest_contour)
+        cv.rectangle(img_bbox, (x, y), (x+w, y+h), (255, 0, 0), 2)
+    cv.imwrite('output_images/contour_bbox.png', img_bbox)
+    
+    # draw contour with centroid
+    img_centroid = img.copy()
+    cv.drawContours(img_centroid, contours, -1, (0, 255, 0), 2)
+    if len(contours) > 0:
+        largest_contour = max(contours, key=cv.contourArea)
+        M = cv.moments(largest_contour)
+        if M['m00'] != 0:
+            cx = int(M['m10'] / M['m00'])
+            cy = int(M['m01'] / M['m00'])
+            cv.circle(img_centroid, (cx, cy), 5, (0, 0, 255), -1)
+    cv.imwrite('output_images/contour_centroid.png', img_centroid)
+    
     if len(contours) > 0:
         largest_contour = max(contours, key=cv.contourArea)
         area = cv.contourArea(largest_contour)
@@ -304,7 +339,9 @@ def contour_analysis_op(img, canny):
             cy = int(M['m01'] / M['m00'])
         else:
             cx, cy = 0, 0
-        
+    
+    
+    
         # save measurements
         measurements = {
             'Metric': ['Area', 'Perimeter', 'BBox_X', 'BBox_Y', 'BBox_Width', 'BBox_Height', 'Centroid_X', 'Centroid_Y'],
